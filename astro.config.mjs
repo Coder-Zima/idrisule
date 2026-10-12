@@ -11,7 +11,7 @@ import { defineConfig, fontProviders } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://example.com',
+	site: 'https://idrisule.netlify.app',
 	adapter: netlify({
 		devFeatures: {
 			environmentVariables: false,
