@@ -1,0 +1,136 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
+import { SITE_TITLE } from '../../consts';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<BaseLayout title={`Blog | ${SITE_TITLE}`}>
+	<div class="blog-page">
+		<header class="archive-heading">
+			<p>THE JOURNAL</p>
+			<h1>All posts</h1>
+		</header>
+		<ul class="post-grid">
+			{posts.map((post) => (
+				<li>
+					<a href={`/blog/${post.id}/`}>
+						{post.data.heroImage && (
+							<Image width={720} height={360} src={post.data.heroImage} alt="" />
+						)}
+						<p class="date"><FormattedDate date={post.data.pubDate} /></p>
+						<h2 class="title">{post.data.title}</h2>
+						<p class="description">{post.data.description}</p>
+					</a>
+				</li>
+			))}
+		</ul>
+		<a class="home-button" href="/">Return to homepage</a>
+	</div>
+</BaseLayout>
+
+<style>
+	.blog-page {
+		width: 100%;
+		max-width: 960px;
+		margin-inline: auto;
+	}
+
+	.archive-heading {
+		margin-bottom: 2rem;
+		padding-bottom: 1.25rem;
+		border-bottom: 1px solid #00000021;
+	}
+
+	.archive-heading p {
+		margin: 0 0 0.5rem;
+		font-family: 'Quattrocento Sans', sans-serif;
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.16em;
+	}
+
+	.archive-heading h1 {
+		margin: 0;
+		color: #252525;
+		font-size: 2.75rem;
+		font-weight: 400;
+	}
+
+	.post-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 2rem;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.post-grid a {
+		display: block;
+		color: inherit;
+		text-decoration: none;
+	}
+
+	.post-grid img {
+		width: 100%;
+		aspect-ratio: 2 / 1;
+		margin-bottom: 0.9rem;
+		border-radius: 4px;
+		object-fit: cover;
+	}
+
+	.date {
+		margin: 0 0 0.4rem;
+		font-family: 'Quattrocento Sans', sans-serif;
+		font-size: 0.8rem;
+	}
+
+	.title {
+		margin: 0;
+		color: #252525;
+		font-size: 1.5rem;
+		font-weight: 400;
+		line-height: 1.2;
+	}
+
+	.description {
+		margin: 0.5rem 0 0;
+		font-size: 0.9rem;
+		line-height: 1.55;
+	}
+
+	.post-grid a:hover .title {
+		text-decoration: underline;
+		text-underline-offset: 4px;
+	}
+
+	.home-button {
+		display: inline-flex;
+		margin-top: 2rem;
+		padding: 0.7rem 1rem;
+		border: 1px solid #006D5B;
+		border-radius: 4px;
+		color: #006D5B;
+		font-family: 'Quattrocento Sans', sans-serif;
+		font-size: 0.85rem;
+		text-decoration: none;
+		transition: background-color 160ms ease, color 160ms ease;
+	}
+
+	.home-button:hover {
+		background: #006D5B;
+		color: #fff;
+	}
+
+	@media (max-width: 640px) {
+		.post-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

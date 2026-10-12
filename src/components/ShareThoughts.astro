@@ -1,0 +1,73 @@
+---
+const currentUrl = Astro.url.href;
+const whatsappMessage = encodeURIComponent('Thought you might enjoy this:');
+const shareUrl = encodeURIComponent(currentUrl);
+---
+
+<div class="mt-12 border-t border-[#dce4dc] pt-8">
+  <div class="text-center">
+    <p class="text-xs font-bold uppercase tracking-[0.2em] text-theme-text/70">love thoughts from idris?</p>
+    <p class="mt-2 text-sm text-theme-text/60">share with your friends</p>
+  </div>
+
+  <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
+    <a
+      href={`https://api.whatsapp.com/send?text=${whatsappMessage}%20${shareUrl}`}
+      target="_blank"
+      rel="noreferrer"
+      class="inline-flex items-center justify-center rounded-full border border-[#006D5B] px-4 py-2 text-sm font-medium text-[#006D5B] transition hover:bg-[#006D5B] hover:text-white"
+      aria-label="Share on WhatsApp"
+    >
+      WhatsApp
+    </a>
+
+    <a
+      href={`https://twitter.com/intent/tweet?url=${shareUrl}`}
+      target="_blank"
+      rel="noreferrer"
+      class="inline-flex items-center justify-center rounded-full border border-[#006D5B] px-4 py-2 text-sm font-medium text-[#006D5B] transition hover:bg-[#006D5B] hover:text-white"
+      aria-label="Share on X"
+    >
+      X
+    </a>
+
+    <button
+      type="button"
+      class="share-button inline-flex items-center justify-center rounded-full border border-[#006D5B] px-4 py-2 text-sm font-medium text-[#006D5B] transition hover:bg-[#006D5B] hover:text-white"
+      aria-label="Share this page"
+    >
+      Share
+    </button>
+  </div>
+</div>
+
+<script>
+  const shareButton = document.querySelector('.share-button');
+
+  if (shareButton) {
+    shareButton.addEventListener('click', async () => {
+      const url = window.location.href;
+
+      try {
+        if (navigator.share) {
+          await navigator.share({
+            title: document.title,
+            text: 'Thought you might enjoy this:',
+            url,
+          });
+          return;
+        }
+
+        await navigator.clipboard.writeText(url);
+        const originalText = shareButton.textContent;
+        shareButton.textContent = 'Copied!';
+
+        setTimeout(() => {
+          shareButton.textContent = originalText;
+        }, 1500);
+      } catch (error) {
+        console.error('Share failed:', error);
+      }
+    });
+  }
+</script>

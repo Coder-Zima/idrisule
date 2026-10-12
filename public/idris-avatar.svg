@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 160" fill="none">
+	<rect width="160" height="160" rx="18" fill="#E9ECE7" />
+	<path d="M24 32h112M24 128h112" stroke="#C5CBC3" stroke-width="2" />
+	<circle cx="80" cy="80" r="48" stroke="#252525" stroke-width="2" />
+	<text
+		x="80"
+		y="91"
+		fill="#252525"
+		font-family="Georgia, serif"
+		font-size="36"
+		text-anchor="middle"
+	>IS</text>
+</svg>

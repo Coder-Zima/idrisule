@@ -1,0 +1,37 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Sidebar from '../components/Sidebar.astro';
+import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { title = SITE_TITLE, description = SITE_DESCRIPTION } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Quattrocento+Sans:wght@400;700&family=Sorts+Mill+Goudy&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body class="m-0 min-h-screen bg-theme-bg font-serif text-theme-text">
+		<div class="min-h-screen md:grid md:grid-cols-[28%_minmax(0,1fr)]">
+			<aside
+				class="border-b border-theme-border px-7 py-9 md:sticky md:top-0 md:h-screen md:overflow-y-auto md:border-b-0 md:border-r md:px-10 md:py-12 lg:px-14"
+			>
+				<Sidebar />
+			</aside>
+			<main class="m-0 w-full max-w-none px-6 py-10 sm:px-10 md:px-14 lg:px-20">
+				<slot />
+			</main>
+		</div>
+	</body>
+</html>
