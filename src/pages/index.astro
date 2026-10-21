@@ -5,13 +5,12 @@ import FallbackImage from '../assets/blog-placeholder-1.jpg';
 import FormattedDate from '../components/FormattedDate.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../consts';
-import ShareThoughts from '../components/ShareThoughts.astro';
 
 export const prerender = false;
 
 const allPosts = await getCollection('blog');
-const featuredIndex = allPosts.length > 0 ? Math.floor(Math.random() * allPosts.length) : -1;
-const featuredPost = allPosts[featuredIndex];
+const sortedPosts = [...allPosts].sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+const latestPost = sortedPosts[0] ?? null;
 const quotePost = allPosts.length > 0 ? allPosts[Math.floor(Math.random() * allPosts.length)] : null;
 const quoteText = quotePost
 	? (quotePost.body || quotePost.data.description || '')
@@ -20,9 +19,8 @@ const quoteText = quotePost
 		.trim()
 		.slice(0, 180)
 	: 'Writing is a way to think clearly and share what matters.';
-const posts = allPosts
-	.filter((_, index) => index !== featuredIndex)
-	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	const posts = sortedPosts
+	.slice(1)
 	.map((post) => ({
 		...post,
 		preview:
@@ -59,24 +57,24 @@ const posts = allPosts
 				</div>
 			</section>
 
-			{featuredPost && (
-				<section class="featured-section" aria-labelledby="featured-title">
+			{latestPost && (
+				<section class="featured-section" aria-labelledby="latest-title">
 					<div class="featured-card">
-						<a class="featured-image-link" href={`/blog/${featuredPost.id}/`}>
+						<a class="featured-image-link" href={`/blog/${latestPost.id}/`}>
 							<Image
-								src={featuredPost.data.heroImage ?? FallbackImage}
-								alt={featuredPost.data.title}
+								src={latestPost.data.heroImage ?? FallbackImage}
+								alt={latestPost.data.title}
 								width={720}
 								height={450}
 								class="featured-image"
 							/>
 						</a>
 						<div class="featured-copy">
-							<p class="featured-badge">FEATURED</p>
-							<h2 id="featured-title" class="featured-title font-serif">{featuredPost.data.title}</h2>
-							<p class="featured-date"><FormattedDate date={featuredPost.data.pubDate} /></p>
-							<p class="featured-description">{featuredPost.data.description}</p>
-							<a class="read-post" href={`/blog/${featuredPost.id}/`}>Read Post <span aria-hidden="true">&rarr;</span></a>
+							<p class="featured-badge">LATEST</p>
+							<h2 id="latest-title" class="featured-title font-serif">{latestPost.data.title}</h2>
+							<p class="featured-date"><FormattedDate date={latestPost.data.pubDate} /></p>
+							<p class="featured-description">{latestPost.data.description}</p>
+							<a class="read-post" href={`/blog/${latestPost.id}/`}>Read Post <span aria-hidden="true">&rarr;</span></a>
 						</div>
 					</div>
 				</section>
@@ -124,13 +122,12 @@ const posts = allPosts
 				)}
 			</section>
 
-			<ShareThoughts />
 	</div>
 
 	<script>
 		const typewriterTargets = document.querySelectorAll('[data-typewriter]');
 
-		const typewriter = (element) => {
+		const typewriter = (element: HTMLElement) => {
 			if (!element || element.dataset.typed === 'true') return;
 			element.dataset.typed = 'true';
 			const fullText = element.dataset.text || element.textContent || '';
@@ -151,7 +148,7 @@ const posts = allPosts
 		const observer = new IntersectionObserver(
 			(entries, currentObserver) => {
 				entries.forEach((entry) => {
-					if (entry.isIntersecting) {
+					if (entry.isIntersecting && entry.target instanceof HTMLElement) {
 						typewriter(entry.target);
 						currentObserver.unobserve(entry.target);
 					}
