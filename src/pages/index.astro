@@ -163,9 +163,9 @@ const quoteText = quotePost
 
 <style>
 	:global(body) {
-		background: #fff;
+		background: var(--site-bg);
 		background-size: auto;
-		color: #595959;
+		color: var(--site-text);
 		font-size: 17px;
 	}
 
@@ -181,7 +181,7 @@ const quoteText = quotePost
 		align-items: center;
 		gap: 5rem;
 		padding: 5.5rem 0 5rem;
-		border-bottom: 1px solid #dce4dc;
+		border-bottom: 1px solid var(--site-rule);
 	}
 
 	.eyebrow {
@@ -189,7 +189,7 @@ const quoteText = quotePost
 		align-items: center;
 		gap: 0.6rem;
 		margin: 0 0 1.25rem;
-		color: #006D5B;
+		color: var(--site-accent);
 		font-size: 0.72rem;
 		font-weight: 700;
 		letter-spacing: 0.08em;
@@ -213,13 +213,13 @@ const quoteText = quotePost
 	}
 
 	.hero h1 span {
-		color: #006D5B;
+		color: var(--site-accent);
 	}
 
 	.intro {
 		max-width: 560px;
 		margin: 0;
-		color: #006D5B;
+		color: var(--site-accent);
 		font-size: 1.1rem;
 		line-height: 1.75;
 	}
@@ -242,7 +242,7 @@ const quoteText = quotePost
 		align-items: center;
 		gap: 2.25rem;
 		padding: 1rem;
-		border: 1px solid #00000021;
+		border: 1px solid var(--site-border);
 		border-radius: 10px;
 	}
 
@@ -268,8 +268,8 @@ const quoteText = quotePost
 		margin: 0 0 1rem;
 		padding: 0.35rem 0.55rem;
 		border-radius: 2px;
-		background: #006D5B;
-		color: #fff;
+		background: var(--site-accent);
+		color: var(--site-accent-contrast);
 		font-family: 'Quattrocento Sans', sans-serif;
 		font-size: 0.68rem;
 		font-weight: 700;
@@ -278,7 +278,7 @@ const quoteText = quotePost
 
 	.featured-title {
 		margin: 0;
-		color: #252525;
+		color: var(--site-heading);
 		font-size: 2.25rem;
 		font-weight: 400;
 		line-height: 1.15;
@@ -286,14 +286,14 @@ const quoteText = quotePost
 
 	.featured-date {
 		margin: 0.75rem 0 0;
-		color: #595959;
+		color: var(--site-muted);
 		font-family: 'Quattrocento Sans', sans-serif;
 		font-size: 0.82rem;
 	}
 
 	.featured-description {
 		margin: 1rem 0 1.25rem;
-		color: #595959;
+		color: var(--site-text);
 		font-size: 1rem;
 		line-height: 1.65;
 	}
@@ -302,7 +302,7 @@ const quoteText = quotePost
 		display: inline-flex;
 		align-items: center;
 		gap: 0.65rem;
-		color: #006D5B;
+		color: var(--site-accent);
 		font-family: 'Quattrocento Sans', sans-serif;
 		font-size: 0.88rem;
 		font-weight: 700;
@@ -320,10 +320,10 @@ const quoteText = quotePost
 		gap: 1rem;
 		min-height: 48px;
 		padding: 0.65rem 1.05rem;
-		border: 1px solid #000;
+		border: 1px solid var(--site-heading);
 		border-radius: 4px;
 		background: transparent;
-		color: #000;
+		color: var(--site-heading);
 		font-size: 0.9rem;
 		font-weight: 700;
 		text-decoration: none;
@@ -332,8 +332,8 @@ const quoteText = quotePost
 
 	.primary-link:hover {
 		transform: translateY(-2px);
-		background: #f4f4f4;
-		color: #000;
+		background: var(--site-surface-hover);
+		color: var(--site-heading);
 	}
 
 	.social-links {
@@ -344,16 +344,16 @@ const quoteText = quotePost
 
 	.social-links a,
 	.all-posts {
-		color: #006D5B;
+		color: var(--site-accent);
 		font-size: 0.85rem;
 		font-weight: 700;
-		text-decoration-color: #a9b8ab;
+		text-decoration-color: var(--site-underline);
 		text-underline-offset: 4px;
 	}
 
 	.social-links a:hover,
 	.all-posts:hover {
-		color: #c35f43;
+		color: var(--site-warm);
 	}
 
 	.avatar-panel {
@@ -363,7 +363,7 @@ const quoteText = quotePost
 		min-height: 310px;
 		overflow: hidden;
 		border-radius: 6px;
-		background-color: #006D5B;
+		background-color: var(--site-accent-panel);
 		background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
 		background-size: 18px 18px;
 	}
@@ -375,8 +375,8 @@ const quoteText = quotePost
 		aspect-ratio: 1;
 		border: 1px solid rgba(255, 255, 255, 0.5);
 		border-radius: 50%;
-		background: #dbeafe;
-		color: #006D5B;
+		background: var(--site-accent-soft);
+		color: var(--site-avatar-text);
 		font-size: 4.5rem;
 		font-weight: 700;
 		line-height: 1;
@@ -399,8 +399,8 @@ const quoteText = quotePost
 
 	.quote-shell {
 		padding: 2rem 0;
-		border-top: 1px solid #dce4dc;
-		border-bottom: 1px solid #dce4dc;
+		border-top: 1px solid var(--site-rule);
+		border-bottom: 1px solid var(--site-rule);
 	}
 
 	.quote-label {
@@ -414,7 +414,7 @@ const quoteText = quotePost
 	.quote-text {
 		display: inline-block;
 		max-width: 100%;
-		color: #5a5a5a;
+		color: var(--site-muted);
 		font-style: italic;
 		letter-spacing: -0.02em;
 		white-space: normal;
@@ -422,7 +422,7 @@ const quoteText = quotePost
 
 	.quote-attribution {
 		margin: 1rem 0 0;
-		color: #5a5a5a;
+		color: var(--site-muted);
 		font-size: 0.82rem;
 		font-weight: 700;
 		letter-spacing: 0.1em;
@@ -471,7 +471,7 @@ const quoteText = quotePost
 		min-height: 102px;
 		padding: 1rem 0;
 		border: 0;
-		border-bottom: 1px solid #00000021;
+		border-bottom: 1px solid var(--site-border);
 		border-radius: 0;
 		color: inherit;
 		text-decoration: none;
@@ -481,11 +481,11 @@ const quoteText = quotePost
 	.post-row:hover {
 		padding-right: 0;
 		padding-left: 0;
-		background: rgba(255, 255, 255, 0.55);
+		background: var(--site-surface-hover);
 	}
 
 	.post-number {
-		color: #c35f43;
+		color: var(--site-warm);
 		font-size: 0.78rem;
 		font-weight: 700;
 	}
@@ -497,7 +497,7 @@ const quoteText = quotePost
 	}
 
 	.post-title {
-		color: #006D5B;
+		color: var(--site-accent);
 		font-size: 1.1rem;
 		font-weight: 700;
 		line-height: 1.35;
@@ -506,7 +506,7 @@ const quoteText = quotePost
 	.post-description {
 		display: -webkit-box;
 		overflow: hidden;
-		color: #006D5B;
+		color: var(--site-accent);
 		font-size: 0.86rem;
 		line-height: 1.5;
 		-webkit-box-orient: vertical;
@@ -514,20 +514,20 @@ const quoteText = quotePost
 	}
 
 	.post-date {
-		color: #006D5B;
+		color: var(--site-accent);
 		font-size: 0.78rem;
 		white-space: nowrap;
 	}
 
 	.post-arrow {
-		color: #006D5B;
+		color: var(--site-accent);
 		font-size: 1rem;
 		text-align: right;
 	}
 
 	.empty-state {
 		padding: 1.5rem 0;
-		color: #006D5B;
+		color: var(--site-accent);
 	}
 
 	@media (max-width: 720px) {

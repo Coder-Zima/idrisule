@@ -44,7 +44,7 @@ const posts = (await getCollection('blog')).sort(
 	.archive-heading {
 		margin-bottom: 2rem;
 		padding-bottom: 1.25rem;
-		border-bottom: 1px solid #00000021;
+		border-bottom: 1px solid var(--site-border);
 	}
 
 	.archive-heading p {
@@ -57,7 +57,7 @@ const posts = (await getCollection('blog')).sort(
 
 	.archive-heading h1 {
 		margin: 0;
-		color: #252525;
+		color: var(--site-heading);
 		font-size: 2.75rem;
 		font-weight: 400;
 	}
@@ -93,7 +93,7 @@ const posts = (await getCollection('blog')).sort(
 
 	.title {
 		margin: 0;
-		color: #252525;
+		color: var(--site-heading);
 		font-size: 1.5rem;
 		font-weight: 400;
 		line-height: 1.2;
@@ -114,9 +114,9 @@ const posts = (await getCollection('blog')).sort(
 		display: inline-flex;
 		margin-top: 2rem;
 		padding: 0.7rem 1rem;
-		border: 1px solid #006D5B;
+		border: 1px solid var(--site-accent);
 		border-radius: 4px;
-		color: #006D5B;
+		color: var(--site-accent);
 		font-family: 'Quattrocento Sans', sans-serif;
 		font-size: 0.85rem;
 		text-decoration: none;
@@ -124,8 +124,8 @@ const posts = (await getCollection('blog')).sort(
 	}
 
 	.home-button:hover {
-		background: #006D5B;
-		color: #fff;
+		background: var(--site-accent);
+		color: var(--site-accent-contrast);
 	}
 
 	@media (max-width: 640px) {

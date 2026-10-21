@@ -21,6 +21,43 @@ const { title, description, image = FallbackImage } = Astro.props;
 <!-- Global Metadata -->
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
+<script is:inline>
+	(() => {
+		const root = document.documentElement;
+		let theme = 'light';
+
+		try {
+			theme = localStorage.getItem('site-theme') === 'dark' ? 'dark' : 'light';
+		} catch {}
+
+		root.dataset.theme = theme;
+
+		const syncButtons = () => {
+			document.querySelectorAll('[data-theme-toggle]').forEach((button) => {
+				const label = root.dataset.theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode';
+				button.setAttribute('aria-label', label);
+				button.setAttribute('title', label);
+				button.setAttribute('aria-pressed', String(root.dataset.theme === 'dark'));
+			});
+		};
+
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', syncButtons, { once: true });
+		} else {
+			syncButtons();
+		}
+
+		document.addEventListener('click', (event) => {
+			if (!(event.target instanceof Element) || !event.target.closest('[data-theme-toggle]')) return;
+
+			root.dataset.theme = root.dataset.theme === 'dark' ? 'light' : 'dark';
+			try {
+				localStorage.setItem('site-theme', root.dataset.theme);
+			} catch {}
+			syncButtons();
+		});
+	})();
+</script>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <link rel="icon" href="/favicon.ico" />
 <link rel="sitemap" href="/sitemap-index.xml" />
